@@ -1,0 +1,8 @@
+name: ServerPortals
+main: main.java.org.untreat.serverportals.Main
+version: "1.0.0"
+api: ["1.0.0"]
+
+load: POSTWORLD
+author: Woukie
+description: Sends players to the other servers (with portals!).
