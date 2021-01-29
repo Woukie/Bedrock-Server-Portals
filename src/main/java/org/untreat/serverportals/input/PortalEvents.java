@@ -17,7 +17,7 @@ public class PortalEvents implements Listener {
 	private void onBlockBreak(BlockBreakEvent event) {
 		Player player = event.getPlayer();
 		
-		if (player.getInventory().getItemInHand().getId() == Item.STICK) {
+		if (player.getInventory().getItemInHand().getId() == Item.STICK && player.hasPermission("serverportals.use")) {
 			Vector3 blockPosVector3 = event.getBlock().getLocation().asVector3f().asVector3();
 			
 			if (Main.portalOperator.addLeftSelection(blockPosVector3, event.getPlayer())) {
@@ -34,7 +34,7 @@ public class PortalEvents implements Listener {
 	private void onPlayerInteract(PlayerInteractEvent event) {
 		Player player = event.getPlayer();
 		
-		if (event.getAction().equals(PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) && event.getPlayer().getInventory().getItemInHand().getId() == Item.STICK) {
+		if (event.getAction().equals(PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) && event.getPlayer().getInventory().getItemInHand().getId() == Item.STICK && player.hasPermission("serverportals.use")) {
 			Vector3 blockPosVector3 = event.getBlock().getLocation().asVector3f().asVector3();
 			
 			if (Main.portalOperator.addRightSelection(blockPosVector3, event.getPlayer())) {

@@ -19,10 +19,16 @@ public class PortalsCommand extends Command {
 		this.commandParameters.put("default", new CommandParameter[] {
 				new CommandParameter("portalOperation", new String[] {"create", "edit", "show", "hide", "delete"})
 		});
+		
+		this.setPermission("serverportals.use");
 	}
-
+	
 	@Override
 	public boolean execute(CommandSender sender, String label, String[] args) {
+		
+		if (!testPermission(sender)) {
+			return false;
+		}
 		
 		if (sender instanceof Player && checkArgs(args.length, 1, (Player)sender)) {
 			switch (args[0]) {
