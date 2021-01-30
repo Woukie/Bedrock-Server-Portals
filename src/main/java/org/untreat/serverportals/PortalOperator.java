@@ -155,30 +155,40 @@ public class PortalOperator {
 		return false;
 	}
 	
+	// Returns true if the selection changed
 	public boolean addLeftSelection(Vector3 position, Player player) {
-		try {
-			if (!playerSelections.containsKey(player)) {
-				playerSelections.put(player, new Vector3[] {position, null});
-			} else {
-				playerSelections.put(player, new Vector3[] {position, playerSelections.get(player)[1]});
+		if (!playerSelections.containsKey(player)) {
+			playerSelections.put(player, new Vector3[] {position, null});
+			
+		} else {
+			Vector3[] originalPlayerSelection = playerSelections.get(player);
+			
+			if (originalPlayerSelection[0] != null && originalPlayerSelection[0].equals(position)) {
+				return false;
 			}
-			return true;
-		} catch (Exception e) {
-			return false;
+			
+			playerSelections.put(player, new Vector3[] {position, originalPlayerSelection[1]});
 		}
+		
+		return true;
 	}
 	
+	// Returns true if the selection changed
 	public boolean addRightSelection(Vector3 position, Player player) {
-		try {
-			if (!playerSelections.containsKey(player)) {
-				playerSelections.put(player, new Vector3[] {null, position});
-			} else {
-				playerSelections.put(player, new Vector3[] {playerSelections.get(player)[0], position});
+		if (!playerSelections.containsKey(player)) {
+			playerSelections.put(player, new Vector3[] {null, position});
+			
+		} else {
+			Vector3[] originalPlayerSelection = playerSelections.get(player);
+			
+			if (originalPlayerSelection[1] != null && originalPlayerSelection[1].equals(position)) {
+				return false;
 			}
-			return true;
-		} catch (Exception e) {
-			return false;
+			
+			playerSelections.put(player, new Vector3[] {originalPlayerSelection[0], position});
 		}
+		
+		return true;
 	}
 	
 	public Vector3[] getPlayerSelection(Player player) {
